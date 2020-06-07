@@ -1,4 +1,5 @@
-/*
+/* https://www.codewars.com/kata/5659c6d896bc135c4c00021e
+
 Write a function that takes a positive integer and returns the next smaller positive integer containing the same digits.
 
 For example:
@@ -34,6 +35,7 @@ function nextSmaller (n) {
   */
 
   while (n.toString().split('').length === aux.toString().split('').length && sameDigits === false && aux > 0) {
+    console.log(`aux`, aux, aux.toString().split('').length)
     if (checkSameDigits(n, aux)) return aux
     aux--
   }
