@@ -34,7 +34,7 @@ HINT II: See https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/bo
 var assert = require('assert')
 
 // Using Memoization (not able to complete the kata)
-function fib (n, mem) {
+function fibMemo (n, mem) {
   const createMemo = () => {
     const memoArr = new Array(n + 1)
     // Setting values for 0 and 1 positions since Fib(0) = 0 and Fib(1) = 1
@@ -45,7 +45,7 @@ function fib (n, mem) {
 
   const memo = mem ? mem : createMemo()
   if (memo[n] != null) return memo[n]
-  memo[n] = fib(n - 1, memo) + fib(n - 2, memo)
+  memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo)
   return memo[n]
 }
 
