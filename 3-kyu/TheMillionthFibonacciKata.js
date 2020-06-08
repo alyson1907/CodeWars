@@ -82,12 +82,12 @@ function fib (n) {
   }
 }
 
-// assert.equal(fib(0), 0n)
-// assert.equal(fib(1), 1n)
-// assert.equal(fib(2), 1n)
-// assert.equal(fib(3), 2n)
-// assert.equal(fib(4), 3n)
-// assert.equal(fib(5), 5n)
-// assert.equal(fib(-6), -8n)
+assert.equal(fib(0), 0n)
+assert.equal(fib(1), 1n)
+assert.equal(fib(2), 1n)
+assert.equal(fib(3), 2n)
+assert.equal(fib(4), 3n)
+assert.equal(fib(5), 5n)
+assert.equal(fib(-6), -8n)
 
 console.log(fibAurea(20))
