@@ -52,7 +52,7 @@ function fibMemo (n, mem) {
 /* Using explicit formula from Johannes Kepler (Read more: https://pt.wikipedia.org/wiki/Sequência_de_Fibonacci#Fórmula_explícita)
 (not able to complete the kata (Maximum call stack)) */
 const fibAurea = n => {
-  const res = BigInt((1 / Math.sqrt(5)) * (Math.pow(((1 + Math.sqrt(5)) / 2), n) - Math.pow(((1 - Math.sqrt(5)) / 2), n)))
+  const res = (1 / Math.sqrt(5)) * (Math.pow(((1 + Math.sqrt(5)) / 2), n) - Math.pow(((1 - Math.sqrt(5)) / 2), n))
   return res
 }
 
@@ -82,12 +82,12 @@ function fib (n) {
   }
 }
 
-assert.equal(fib(0), 0n)
-assert.equal(fib(1), 1n)
-assert.equal(fib(2), 1n)
-assert.equal(fib(3), 2n)
-assert.equal(fib(4), 3n)
-assert.equal(fib(5), 5n)
-assert.equal(fib(-6), -8n)
+// assert.equal(fib(0), 0n)
+// assert.equal(fib(1), 1n)
+// assert.equal(fib(2), 1n)
+// assert.equal(fib(3), 2n)
+// assert.equal(fib(4), 3n)
+// assert.equal(fib(5), 5n)
+// assert.equal(fib(-6), -8n)
 
-// console.log(fib(2000000))
+console.log(fibAurea(20))
