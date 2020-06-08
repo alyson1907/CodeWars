@@ -38,15 +38,15 @@ function fibMemo (n, mem) {
   const createMemo = () => {
     const memoArr = new Array(n + 1)
     // Setting values for 0 and 1 positions since Fib(0) = 0 and Fib(1) = 1
-    memoArr[0] = 0
-    memoArr[1] = 1
+    memoArr[0] = 0n
+    memoArr[1] = 1n
     return memoArr
   }
 
   const memo = mem ? mem : createMemo()
   if (memo[n] != null) return memo[n]
   memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo)
-  return memo[n]
+  return BigInt(memo[n])
 }
 
 /* Using explicit formula from Johannes Kepler (Read more: https://pt.wikipedia.org/wiki/Sequência_de_Fibonacci#Fórmula_explícita)
@@ -89,3 +89,5 @@ assert.equal( fib(3), 2n )
 assert.equal( fib(4), 3n )
 assert.equal( fib(5), 5n )
 assert.equal( fib(-6), -8n )
+
+console.log(fibMemo(500))
