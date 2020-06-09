@@ -1,17 +1,18 @@
 const assert = require('assert')
-const encodeRailFenceCipher = (string, numberRails) => {
-  const setupRails = (letters, numberRails) => {
-    let sum = 1
-    let currNumber = 0
-    const rails = letters.map((char, i) => {
-      if ((currNumber === 0 && i !== 0) || currNumber === numberRails - 1) sum = (-1 * sum)
-      const res = currNumber + 1
-      currNumber += sum
-      return res
-    })
-    return rails
-  }
 
+const setupRails = (letters, numberRails) => {
+  let sum = 1
+  let currNumber = 0
+  const rails = letters.map((char, i) => {
+    if ((currNumber === 0 && i !== 0) || currNumber === numberRails - 1) sum = (-1 * sum)
+    const res = currNumber + 1
+    currNumber += sum
+    return res
+  })
+  return rails
+}
+
+const encodeRailFenceCipher = (string, numberRails) => {
   const catString = (letters, rails, numberRails) => {
     let str = ''
     // i: number in rail we are looking for
@@ -38,7 +39,6 @@ const decodeRailFenceCipher = (string, numberRails) => {
 
 }
 
-encodeRailFenceCipher("WEAREDISCOVEREDFLEEATONCE", 3)
-// assert.equal(encodeRailFenceCipher("WEAREDISCOVEREDFLEEATONCE", 3), "WECRLTEERDSOEEFEAOCAIVDEN")
+assert.equal(encodeRailFenceCipher("WEAREDISCOVEREDFLEEATONCE", 3), "WECRLTEERDSOEEFEAOCAIVDEN")
 // assert.equal(decodeRailFenceCipher("WECRLTEERDSOEEFEAOCAIVDEN", 3), "WEAREDISCOVEREDFLEEATONCE")
 // assert.equal(encodeRailFenceCipher("Hello, World!", 3), "Hoo!el,Wrdl l")
