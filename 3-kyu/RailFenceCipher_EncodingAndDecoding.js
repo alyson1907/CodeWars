@@ -20,7 +20,6 @@ const encodeRailFenceCipher = (string, numberRails) => {
         // concatenating
         if (rails[j] === i) {
           str += letters[j]
-          console.log(str)
         }
       })
     }
