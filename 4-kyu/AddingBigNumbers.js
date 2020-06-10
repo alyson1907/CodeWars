@@ -4,8 +4,8 @@ We need to sum big numbers and we require your help.
 Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string.
 
 Example
-add('123', '321'); -> '444'
-add('11', '99');   -> '110'
+add('123', '321') -> '444'
+add('11', '99')   -> '110'
 Notes
 The input numbers are big.
 The input is a string of only digits
@@ -19,7 +19,7 @@ const sum2 = (c, d, pastCarry = 0) => {
   const sum = (c + d + pastCarry)
   const res = sum % 10
   return {
-    carry: parseInt(sum.toString().split('').shift()) || 0,
+    carry: parseInt(sum / 10),
     result: res
   }
 }
@@ -30,7 +30,7 @@ const add = (a, b) => {
   const addedNumber = []
   let carry = 0
   // Sums until any of the numbers is out of digits 
-  while (digitsA.length > 0 || digitsB.length > 0) {
+  while (digitsA.length > 0 && digitsB.length > 0) {
     const { carry: lastCarry, result } = sum2(digitsA.pop(), digitsB.pop(), carry)
     carry = lastCarry
     addedNumber.unshift(result)
@@ -46,15 +46,14 @@ const add = (a, b) => {
   } else if (carry) {
     addedNumber.unshift(carry)
   }
-
-  return addedNumber.join('')
+  const finalNumber = [...remainingDigits, ...addedNumber]
+  return finalNumber.join('')
 }
 
-
-assert.equal(add('1', '1'), '2');
-assert.equal(add('123', '456'), '579');
-assert.equal(add('888', '222'), '1110');
-assert.equal(add('1372', '69'), '1441');
-assert.equal(add('12', '456'), '468');
-assert.equal(add('101', '100'), '201');
+assert.equal(add('1', '1'), '2')
+assert.equal(add('123', '456'), '579')
+assert.equal(add('888', '222'), '1110')
+assert.equal(add('1372', '69'), '1441')
+assert.equal(add('12', '456'), '468')
+assert.equal(add('101', '100'), '201')
 assert.equal(add('63829983432984289347293874', '90938498237058927340892374089'), '91002328220491911630239667963')
