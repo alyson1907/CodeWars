@@ -1,4 +1,6 @@
-/* https://www.codewars.com/kata/525f4206b73515bffb000b21/train/javascript
+/* [Duplicate]
+https://www.codewars.com/kata/525f4206b73515bffb000b21/train/javascript
+https://www.codewars.com/kata/sum-strings-as-numbers/train/javascript
 We need to sum big numbers and we require your help.
 
 Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string.
@@ -13,7 +15,7 @@ The numbers are positives
 */
 const assert = require('assert')
 
-const sum2 = (c, d, pastCarry = 0) => {
+const sum2 = (c = 0, d = 0, pastCarry = 0) => {
   c = parseInt(c)
   d = parseInt(d)
   const sum = (c + d + pastCarry)
@@ -29,7 +31,7 @@ const add = (a, b) => {
   const digitsB = b.split('')
   const addedNumber = []
   let carry = 0
-  // Sums until any of the numbers is out of digits 
+  // Sums until any of the arrays is out of digits 
   while (digitsA.length > 0 && digitsB.length > 0) {
     const { carry: lastCarry, result } = sum2(digitsA.pop(), digitsB.pop(), carry)
     carry = lastCarry
@@ -41,7 +43,10 @@ const add = (a, b) => {
     while (carry) {
       const { carry: lastCarry, result } = sum2(remainingDigits.pop(), 0, carry)
       carry = lastCarry
+      console.log(`lastCarry`, lastCarry)
+
       addedNumber.unshift(result)
+      console.log(`while`, addedNumber)
     }
   } else if (carry) {
     addedNumber.unshift(carry)
