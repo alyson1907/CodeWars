@@ -37,13 +37,13 @@ const add = (a, b) => {
   }
   // Handling carry
   const remainingDigits = digitsA.length ? digitsA : digitsB
-  if (remainingDigits.length && carry !== 0) {
-    while (carry !== 0) {
+  if (remainingDigits.length && carry) {
+    while (carry) {
       const { carry: lastCarry, result } = sum2(remainingDigits.pop(), 0, carry)
       carry = lastCarry
       addedNumber.unshift(result)
     }
-  } else if (carry !== 0) {
+  } else if (carry) {
     addedNumber.unshift(carry)
   }
 
