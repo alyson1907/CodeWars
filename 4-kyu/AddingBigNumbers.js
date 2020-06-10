@@ -25,6 +25,12 @@ const sum2 = (c = 0, d = 0, pastCarry = 0) => {
     result: res
   }
 }
+const removeInitialZeroes = digits => {
+  for (let i = 0; digits[i] == '0'; i++) {
+    digits.shift()
+  }
+  return digits
+}
 
 const add = (a, b) => {
   const digitsA = a.split('')
@@ -43,15 +49,13 @@ const add = (a, b) => {
     while (carry) {
       const { carry: lastCarry, result } = sum2(remainingDigits.pop(), 0, carry)
       carry = lastCarry
-      console.log(`lastCarry`, lastCarry)
-
       addedNumber.unshift(result)
-      console.log(`while`, addedNumber)
     }
   } else if (carry) {
     addedNumber.unshift(carry)
   }
   const finalNumber = [...remainingDigits, ...addedNumber]
+  removeInitialZeroes(finalNumber)
   return finalNumber.join('')
 }
 
