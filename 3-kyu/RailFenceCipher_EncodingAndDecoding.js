@@ -2,13 +2,12 @@ const assert = require('assert')
 // https://www.codewars.com/kata/58c5577d61aefcf3ff000081/train/javascript
 // Cycle = (numberRails * 2) - 2
 const setupRails = (letters, numberRails) => {
-  let sum = 1
+  const cycle = (numberRails * 2) - 2
   let currNumber = 0
-  const rails = letters.map((char, i) => {
-    if ((currNumber === 0 && i !== 0) || currNumber === numberRails - 1) sum = (-1 * sum)
-    const res = currNumber + 1
-    currNumber += sum
-    return res
+  const rails = letters.map(char => {
+    if (currNumber === cycle) currNumber = 0
+    currNumber++
+    return currNumber
   })
   return rails
 }
