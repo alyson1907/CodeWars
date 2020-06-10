@@ -1,3 +1,4 @@
+![](https://www.codewars.com/users/Quik19/badges/large)
 # CodeWars
 ## About CodeWars
 [Codewars](https://www.codewars.com/) is a gamified platform where developers achieve code mastery through challenges called **kata**.
