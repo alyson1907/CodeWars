@@ -1,5 +1,6 @@
 const assert = require('assert')
-
+// https://www.codewars.com/kata/58c5577d61aefcf3ff000081/train/javascript
+// Cycle = (numberRails * 2) - 2
 const setupRails = (letters, numberRails) => {
   let sum = 1
   let currNumber = 0
@@ -30,15 +31,29 @@ const encodeRailFenceCipher = (string, numberRails) => {
   if (!string) return ''
   const letters = string.split('')
   const rails = setupRails(letters, numberRails)
-  const finalStr = catString(letters, rails, numberRails)
-  return finalStr
+  const encoded = catString(letters, rails, numberRails)
+  console.log(JSON.stringify(rails))
+  return encoded
 }
 
 const decodeRailFenceCipher = (string, numberRails) => {
   if (!string) return ''
+  const letters = string.split('')
+  const rails = setupRails(letters, numberRails)
+  const breakSize = parseInt(string.length / numberRails)
+  let currBreakIdx = 0
+  const strParts = []
+  let decoded = ''
+  while (currBreakIdx < string.length) {
+    strParts.push(string.slice(currBreakIdx, currBreakIdx + breakSize))
+    currBreakIdx += breakSize
+  }
+  console.log(strParts)
+
 
 }
-
-assert.equal(encodeRailFenceCipher("WEAREDISCOVEREDFLEEATONCE", 3), "WECRLTEERDSOEEFEAOCAIVDEN")
+encodeRailFenceCipher("WEAREDISCOVEREDFLEEATONCE", 3)
+decodeRailFenceCipher("WECRLTEERDSOEEFEAOCAIVDEN", 3)
+// assert.equal(encodeRailFenceCipher("WEAREDISCOVEREDFLEEATONCE", 3), "WECRLTEERDSOEEFEAOCAIVDEN")
 // assert.equal(decodeRailFenceCipher("WECRLTEERDSOEEFEAOCAIVDEN", 3), "WEAREDISCOVEREDFLEEATONCE")
 // assert.equal(encodeRailFenceCipher("Hello, World!", 3), "Hoo!el,Wrdl l")
