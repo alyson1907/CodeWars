@@ -10,3 +10,7 @@ Bomb.diffuse( 42 );
 
 // 8
 Bomb.diffuse( this.BombKey );
+
+// 7
+this.diffuseTheBomb = () => true
+Bomb.diffuse()
