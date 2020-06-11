@@ -14,3 +14,6 @@ Bomb.diffuse( this.BombKey );
 // 7
 this.diffuseTheBomb = () => true
 Bomb.diffuse()
+
+// 6
+Bomb.diffuse(3.14159)
