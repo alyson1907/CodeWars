@@ -8,3 +8,5 @@ Bomb.diffuse( 42 );
 Bomb.diffuse( 42 );
 Bomb.diffuse( 42 );
 
+// 8
+Bomb.diffuse( this.BombKey );
