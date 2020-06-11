@@ -22,9 +22,11 @@ NOTE 2: The 0x0 (empty matrix) is represented as en empty array inside an array 
 const assert = require('assert')
 
 const snail = array => {
-  if (!array[0]) return []
-  let maxRow = array[0].length
-  let maxCol = array[1].length
+  if (array[0] && !array[0].length) return []
+  
+  const directionOrder = ['R', 'D', 'L', 'U']
+  let maxRow = array[0] && array[0].length || 1
+  let maxCol = array[1] && array[1].length || 1
   let minRow = 0
   let minCol = 0
   let currRow = 0
@@ -45,7 +47,8 @@ const snail = array => {
         res.push(array[currRow][currCol])
         currCol--
       }
-      currCol = minCol + 1
+      currCol = minCol
+      minCol++
     } else if (direction === 'D') {
       currRow++
       while (currRow < maxRow) {
@@ -61,28 +64,16 @@ const snail = array => {
         currRow--
       }
       currRow = minRow + 1
-      minCol++
       minRow++
-    } 
+    }
   }
 
-  walk('R')
-  walk('D')
-  walk('L')
-  walk('U')
+  while (res.length < array[0].length * array.length) {
+    // directionOrder is a FIFO list
+    const currDir = directionOrder.shift()
+    walk(currDir)
+    directionOrder.push(currDir)
+  }
 
   return res
 }
-
-
-const asd = [[1, 2, 3],
-             [4, 5, 6],
-             [7, 8, 9]]
-console.log(snail(asd))
-
-
-// assert.equal(snail([[]]), []);
-// assert.equal(snail([[1]]), [1]);
-// assert.equal(snail([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), [1, 2, 3, 6, 9, 8, 7, 4, 5]);
-// assert.equal(snail([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15], [16, 17, 18, 19, 20], [21, 22, 23, 24, 25]]), [1, 2, 3, 4, 5, 10, 15, 20, 25, 24, 23, 22, 21, 16, 11, 6, 7, 8, 9, 14, 19, 18, 17, 12, 13]);
-// assert.equal(snail([[1, 2, 3, 4, 5, 6], [20, 21, 22, 23, 24, 7], [19, 32, 33, 34, 25, 8], [18, 31, 36, 35, 26, 9], [17, 30, 29, 28, 27, 10], [16, 15, 14, 13, 12, 11]]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]);
