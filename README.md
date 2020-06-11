@@ -1,4 +1,5 @@
 ![](https://www.codewars.com/users/Quik19/badges/large)
+My CodeWars Profile: https://www.codewars.com/users/Quik19
 # CodeWars
 ## About CodeWars
 [Codewars](https://www.codewars.com/) is a gamified platform where developers achieve code mastery through challenges called **kata**.
@@ -10,5 +11,3 @@ On Codewars, users earn ranks and honor for completing kata, contributing kata, 
 ## About Kyu
 **Kyu's** are the difficulty/level of the katas. They go from **8 Kyu** (containing the easiest katas) to **1 Kyu** (hardest katas)
 
-## My Profile
-This is my CodeWars Profile: https://www.codewars.com/users/Quik19
