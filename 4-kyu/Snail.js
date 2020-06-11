@@ -23,32 +23,53 @@ const assert = require('assert')
 
 const snail = array => {
   if (!array[0]) return []
-  let rowLen = array[0].length
-  let colLen = array[1].length
+  let maxRow = array[0].length
+  let maxCol = array[1].length
+  let minRow = 0
+  let minCol = 0
   let currRow = 0
   let currCol = -1
   const res = []
   const walk = (direction) => {
     if (direction === 'R') {
       currCol++
-      while (currCol < colLen) {
+      while (currCol < maxCol) {
         res.push(array[currRow][currCol])
         currCol++
       }
-      currCol = colLen - 1
-      colLen--
+      currCol = maxCol - 1
+      maxCol--
+    } else if (direction === 'L') {
+      currCol--
+      while (currCol >= minCol) {
+        res.push(array[currRow][currCol])
+        currCol--
+      }
+      currCol = minCol + 1
     } else if (direction === 'D') {
       currRow++
-      while (currRow < rowLen) {
+      while (currRow < maxRow) {
         res.push(array[currRow][currCol])
         currRow++
       }
-      currRow = rowLen - 1
-      rowLen--
+      currRow = maxRow - 1
+      maxRow--
+    } else if (direction === 'U') {
+      currRow--
+      while (currRow > minRow) {
+        res.push(array[currRow][currCol])
+        currRow--
+      }
+      currRow = minRow + 1
+      minCol++
+      minRow++
     } 
   }
+
   walk('R')
   walk('D')
+  walk('L')
+  walk('U')
 
   return res
 }
