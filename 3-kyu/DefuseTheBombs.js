@@ -21,8 +21,11 @@ Bomb.diffuse(3.14159)
 // 5
 Bomb.diffuse(new Date().setFullYear(new Date().getFullYear() - 4))
 
+// 4
+Bomb.diffuse(Object.freeze({ key: 43 }))
+
 console.log( Bomb )
 
 console.log( Bomb.diffuse.toString() );
 
-console.log( Object.keys(this))
+// console.log( Object.keys(this))
