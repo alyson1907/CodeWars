@@ -37,7 +37,7 @@ obj.prototype.valueOf = function () {
   }
   return 15
 }
-Bomb.diffuse(obj)
+Bomb.diffuse(new obj())
 
 console.log(Bomb)
 console.log(Bomb.diffuse.toString());
