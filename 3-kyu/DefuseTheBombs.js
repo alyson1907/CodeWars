@@ -39,5 +39,16 @@ obj.prototype.valueOf = function () {
 }
 Bomb.diffuse(new obj())
 
+// 2
+let flag = true
+Math.random = () => {
+  if (flag) {
+    flag = false
+    return 0.5
+  }
+  return 1
+}
+Bomb.diffuse(42)
+
 console.log(Bomb)
 console.log(Bomb.diffuse.toString());
