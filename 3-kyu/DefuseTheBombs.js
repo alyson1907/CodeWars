@@ -1,15 +1,16 @@
 // Defuse all of the Bombs!
 // 10
-Bomb.diffuse( 42 );
+Bomb.diffuse(42)
+
 // 9
-Bomb.diffuse( 42 );
-Bomb.diffuse( 42 );
-Bomb.diffuse( 42 );
-Bomb.diffuse( 42 );
-Bomb.diffuse( 42 );
+Bomb.diffuse(42)
+Bomb.diffuse(42)
+Bomb.diffuse(42)
+Bomb.diffuse(42)
+Bomb.diffuse(42)
 
 // 8
-Bomb.diffuse( this.BombKey );
+Bomb.diffuse(this.BombKey);
 
 // 7
 this.diffuseTheBomb = () => true
@@ -24,8 +25,19 @@ Bomb.diffuse(new Date().setFullYear(new Date().getFullYear() - 4))
 // 4
 Bomb.diffuse(Object.freeze({ key: 43 }))
 
-console.log( Bomb )
+// 3
+function obj () {
+  this.shouldBeLess = true
+}
 
-console.log( Bomb.diffuse.toString() );
+obj.prototype.valueOf = function () {
+  if (this.shouldBeLess) {
+    this.shouldBeLess = false
+    return 5
+  }
+  return 15
+}
+Bomb.diffuse(obj)
 
-// console.log( Object.keys(this))
+console.log(Bomb)
+console.log(Bomb.diffuse.toString());
