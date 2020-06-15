@@ -1,4 +1,4 @@
-// Defuse all of the Bombs!
+// Defuse all of the Bombs! https://www.codewars.com/kata/54d558c72a5e542c0600060f/train/javascript
 // 10
 Bomb.diffuse(42)
 
@@ -26,6 +26,7 @@ Bomb.diffuse(new Date().setFullYear(new Date().getFullYear() - 4))
 Bomb.diffuse(Object.freeze({ key: 43 }))
 
 // 3
+
 function obj () {
   this.shouldBeLess = true
 }
@@ -51,4 +52,4 @@ Math.random = () => {
 Bomb.diffuse(42)
 
 console.log(Bomb)
-console.log(Bomb.diffuse.toString());
+console.log(Bomb.diffuse.toString())

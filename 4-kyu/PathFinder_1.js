@@ -8,12 +8,14 @@ Empty positions are marked `.` - Walls are marked `W`. Start and exit positions 
 
 const pathFinder = maze => {
   maze = maze.split('\n').map(row => row.split(''))
+  maze.forEach(r => console.log(r))
   // Depth First Search implementation
-  const stack = [maze[0][0]] // Stack with starting node
+  const stack = [[0, 0]] // Stack with starting node
   const visited = []
   const isVisited = (i, j) => visited.some(node => node[0] === i && node[1] === j)
   const isWall = (i, j) => maze[i][j] === 'W'
-  const getPossibleNodeEdges = (i, j) => {
+  const isFinalNode = ([i, j]) => (i === maze[0].length - 1) && (j === maze[1].length - 1)
+  const getPossibleNodeEdges = ([i, j]) => {
     const edges = []
     // Right
     if (i + 1 < maze[0].length && !isVisited(i + 1, j) && !isWall(i + 1, j)) edges.push([i + 1, j])
@@ -29,36 +31,43 @@ const pathFinder = maze => {
 
   while (stack.length > 0) {
     const currNode = stack.pop()
-    console.log(getPossibleNodeEdges(0, 0))
+    const edges = getPossibleNodeEdges(currNode)
     
+    const found = edges.find(edge => {
+      visited.push(edge)
+      stack.push(edge)
+      return isFinalNode(edge)
+    })
+
+    if (found) return true
   }
-  
-  console.log(maze)
-  return 
+
+  return false
 }
 
 pathFinder( // true
 `.W.
 .W.
 ...`)
+
   
-// pathFinder( // false
-// `.W.
-// .W.
-// W..`)
+pathFinder( // false
+`.W.
+.W.
+W..`)
   
-// pathFinder( // true
-//   `......
-//   ......
-//   ......
-//   ......
-//   ......
-//   ......`)
+pathFinder( // true
+  `......
+  ......
+  ......
+  ......
+  ......
+  ......`)
   
-// pathFinder( // false
-// `......
-// ......
-// ......
-// ......
-// .....W
-// ....W.`)
+pathFinder( // false
+`......
+......
+......
+......
+.....W
+....W.`)
