@@ -24,29 +24,52 @@ Examples:
 */
 
 const generatePascalTriangle = (lines = 0) => {
-  const triangle = [[1n]]
-  if (!lines) return triangle
+  const triangle = [[1n]];
+  if (!lines) return triangle;
   // n - current line
   for (let n = 1; n < lines + 1; n++) {
-    const qtyElem = n + 1
-    const coef = []
+    const qtyElem = n + 1;
+    const coef = [];
     // i - current element
     for (let i = 0; i < qtyElem; i++) {
-      const up = triangle[n - 1][i] || 0n
-      const upLeft = triangle[n - 1][i - 1] || 0n
-      coef[i] = up + upLeft
+      const up = triangle[n - 1][i] || 0n;
+      const upLeft = triangle[n - 1][i - 1] || 0n;
+      coef[i] = up + upLeft;
     }
-    triangle.push(coef)
+    triangle.push(coef);
   }
-  return triangle
-}
+  return triangle;
+};
 
-const expand = expr => {
-  const getPower = (expr) => parseInt(expr.split('^').pop())
-  const power = getPower(expr)
-  const pascal = generatePascalTriangle(power)
-  console.log(power)
-  console.log(pascal)
-}
+const expand = (expr) => {
+  const formatExpr = (expr) => {
+    let [exp, power] = expr.split('^');
+    let signalsInverted = false;
 
-console.log(expand('(-2k-3)^3'))
+    // If first signal is negative, "multiply" expression by -1
+    exp = exp.split('');
+    exp.shift(); // removing initial parenthesis `(`
+    exp.pop(); // removing last parenthesis `(`
+    if (exp[0] === '-') {
+      signalsInverted = true;
+      exp.shift(); // removes first `-` signal
+      exp = exp.map((ch, i) => {
+        if (ch === '-') return '+';
+        else if (ch === '+') return '-';
+        return ch;
+      });
+    }
+
+    // If the signal of first element is negative, invert the expression signals
+    return {
+      power,
+      signalsInverted,
+      expression: exp.join(''),
+    };
+  };
+
+  const { power, signalsInverted, expression } = formatExpr(expr);
+  console.log(power, signalsInverted, expression);
+};
+
+console.log(expand('(-2k-3)^3'));
