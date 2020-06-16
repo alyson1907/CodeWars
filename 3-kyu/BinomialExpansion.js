@@ -38,12 +38,15 @@ const generatePascalTriangle = (lines = 0) => {
     }
     triangle.push(coef)
   }
-
   return triangle
 }
 
 const expand = expr => {
-  
+  const getPower = (expr) => parseInt(expr.split('^').pop())
+  const power = getPower(expr)
+  const pascal = generatePascalTriangle(power)
+  console.log(power)
+  console.log(pascal)
 }
 
-console.log(generatePascalTriangle(5))
+console.log(expand('(-2k-3)^3'))
