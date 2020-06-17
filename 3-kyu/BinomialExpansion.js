@@ -42,7 +42,7 @@ const generatePascalTriangle = (lines = 0) => {
 };
 
 const expand = (expr) => {
-  const formatExpr = (expr) => {
+  const parseExpr = (expr) => {
     let [exp, power] = expr.split('^');
     let signalsInverted = false;
 
@@ -62,24 +62,37 @@ const expand = (expr) => {
 
     // If the signal of first element is negative, invert the expression signals
     return {
-      power: parseInt(power),
-      signalsInverted,
       expression: exp.join(''),
+      power: parseInt(power),
+      variable: exp.find(ch => /[A-Za-z]/g.test(ch)),
+      varMultCoef: exp.join('').split(/\-|\+/g)[0].split('').find(c => /[1-9]/g.test(c)) || 1,
+      signalsInverted,
     };
   };
 
-  const { power, signalsInverted, expression } = formatExpr(expr);
+  const { expression, power, variable, varMultCoef, signalsInverted } = parseExpr(expr);
+  console.log(`Expression: ${expression}  Power: ${power}  Variable-Coef: ${varMultCoef}  Variable ${variable}  Signal: ${signalsInverted}\n`);
+
   if (power === 0) return 1
   const pascal = generatePascalTriangle(power)
-  console.log(pascal)
+  const pascalCoefs = pascal[power]
+
+  const variableCoefs = pascalCoefs.map((coef, i) => {
+    const pwr = Math.abs(i - power);
+    console.log(pwr)
+    const multCoef = coef * BigInt(Math.pow(varMultCoef, pwr))
+    return `${multCoef}${variable}^${pwr}`
+  })
+
+
 
 };
 
-console.log(expand("(2f+4)^6"));     // returns "64f^6+768f^5+3840f^4+10240f^3+15360f^2+12288f+4096"
-// console.log(expand("(x+1)^2"));      // returns "x^2+2x+1"
-// console.log(expand("(p-1)^3"));      // returns "p^3-3p^2+3p-1"
+console.log(expand("(2f+4)^6"));     // returns "64f^6 + 768f^5 + 3840f^4 + 10240f^3 + 15360f^2 + 12288f + 4096"
+// console.log(expand("(x+1)^2"));      // returns "x^2 + 2x + 1"
+// console.log(expand("(p-1)^3"));      // returns "p^3 - 3p^2 + 3p - 1"
 // console.log(expand("(-2a-4)^0"));    // returns "1"
-// console.log(expand("(-12t+43)^2"));  // returns "144t^2-1032t+1849"
+// console.log(expand("(-12t+43)^2"));  // returns "144t^2- 1032t + 1849"
 // console.log(expand("(r+0)^203"));    // returns "r^203"
-// console.log(expand("(-x-1)^2"));     // returns "x^2+2x+1"
+// console.log(expand("(-x-1)^2"));     // returns "x^2 + 2x + 1"
 
