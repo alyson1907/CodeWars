@@ -61,43 +61,52 @@ const expand = (expr) => {
     }
 
     // If the signal of first element is negative, invert the expression signals
-    const elements = exp.join('').split(/\-|\+/g)
+    const elements = exp.join('').split(/\-|\+/g);
     return {
       expression: exp.join(''),
       power: parseInt(power),
-      variable: exp.find(ch => /[A-Za-z]/g.test(ch)),
-      a: elements[0].split('').find(c => /[1-9]/g.test(c)) || 1,
+      variable: exp.find((ch) => /[A-Za-z]/g.test(ch)),
+      a: elements[0].split('').find((c) => /[1-9]/g.test(c)) || 1,
       b: parseInt(elements[1]),
       signalsInverted,
     };
   };
 
-  const { expression, power, variable, a, b, signalsInverted } = parseExpr(expr);
-  console.log(`Expression: ${expression}  Power: ${power}  Variable-Coef: ${a}    Variable ${variable}  Signal: ${signalsInverted}\n`);
+  const inverted = (elements) => {
+    let plus = true
+    let str = elements.shift()
+    while (elements.length > 0) {
+      str += plus ? '+' : '-'
+      str += elements.shift()
+      plus = !plus
+    }
+    return str
+  };
 
-  if (power === 0) return 1
+  const { expression, power, variable, a, b, signalsInverted } = parseExpr(expr);
+  console.log(`Expression: ${expression}  Power: ${power}  Variable-Coef: ${a}  Variable ${variable}  Signal: ${signalsInverted}\n`);
+
+  if (power === 0) return 1;
   const pascal = generatePascalTriangle(power);
   const pascalCoefs = pascal[power];
 
   // Handling variable coefficients
-  const variableCoefs = pascalCoefs.map((coef, i) => {
+  const elements = pascalCoefs.map((coef, i) => {
     const pwr = Math.abs(i - power);
     const multCoef = coef * BigInt(Math.pow(a, pwr)) * BigInt(Math.pow(b, i));
-    return `${multCoef}${variable}^${pwr}`;
-  })
+    return i === pascalCoefs.length - 1 ? `${multCoef}` : `${multCoef}${variable}^${pwr}`;
+  });
 
+  const shouldInvertSignal = /\-/g.test(expression);
+  console.log(elements)
 
-  console.log(variableCoefs)
-
-
-
+  return shouldInvertSignal ? inverted(elements) : elements.join('+');
 };
 
-console.log(expand("(2f+4)^6"));     // returns "64f^6 + 768f^5 + 3840f^4 + 10240f^3 + 15360f^2 + 12288f + 4096"
+// console.log(expand("(2f+4)^6"));     // returns "64f^6 + 768f^5 + 3840f^4 + 10240f^3 + 15360f^2 + 12288f + 4096"
 // console.log(expand("(x+1)^2"));      // returns "x^2 + 2x + 1"
-// console.log(expand("(p-1)^3"));      // returns "p^3 - 3p^2 + 3p - 1"
+console.log(expand('(p-1)^3')); // returns "p^3 - 3p^2 + 3p - 1"
 // console.log(expand("(-2a-4)^0"));    // returns "1"
 // console.log(expand("(-12t+43)^2"));  // returns "144t^2- 1032t + 1849"
 // console.log(expand("(r+0)^203"));    // returns "r^203"
 // console.log(expand("(-x-1)^2"));     // returns "x^2 + 2x + 1"
-
