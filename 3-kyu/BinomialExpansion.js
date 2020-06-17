@@ -94,7 +94,7 @@ const expand = (expr) => {
   const elements = pascalCoefs.map((coef, i) => {
     const pwr = Math.abs(i - power);
     const multCoef = coef * BigInt(Math.pow(a, pwr)) * BigInt(Math.pow(b, i));
-    return i === pascalCoefs.length - 1 ? `${multCoef}` : `${multCoef}${variable}^${pwr}`;
+    return i === pascalCoefs.length - 1 ? `${multCoef > 0 ? multCoef : ''}` : `${multCoef > 1 ? multCoef : ''}${variable}${pwr > 1 ? `^${pwr}` : ''}`;
   });
 
   const shouldInvertSignal = /\-/g.test(expression);
