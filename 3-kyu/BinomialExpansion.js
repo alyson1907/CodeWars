@@ -61,28 +61,33 @@ const expand = (expr) => {
     }
 
     // If the signal of first element is negative, invert the expression signals
+    const elements = exp.join('').split(/\-|\+/g)
     return {
       expression: exp.join(''),
       power: parseInt(power),
       variable: exp.find(ch => /[A-Za-z]/g.test(ch)),
-      varMultCoef: exp.join('').split(/\-|\+/g)[0].split('').find(c => /[1-9]/g.test(c)) || 1,
+      a: elements[0].split('').find(c => /[1-9]/g.test(c)) || 1,
+      b: parseInt(elements[1]),
       signalsInverted,
     };
   };
 
-  const { expression, power, variable, varMultCoef, signalsInverted } = parseExpr(expr);
-  console.log(`Expression: ${expression}  Power: ${power}  Variable-Coef: ${varMultCoef}  Variable ${variable}  Signal: ${signalsInverted}\n`);
+  const { expression, power, variable, a, b, signalsInverted } = parseExpr(expr);
+  console.log(`Expression: ${expression}  Power: ${power}  Variable-Coef: ${a}    Variable ${variable}  Signal: ${signalsInverted}\n`);
 
   if (power === 0) return 1
-  const pascal = generatePascalTriangle(power)
-  const pascalCoefs = pascal[power]
+  const pascal = generatePascalTriangle(power);
+  const pascalCoefs = pascal[power];
 
+  // Handling variable coefficients
   const variableCoefs = pascalCoefs.map((coef, i) => {
     const pwr = Math.abs(i - power);
-    console.log(pwr)
-    const multCoef = coef * BigInt(Math.pow(varMultCoef, pwr))
-    return `${multCoef}${variable}^${pwr}`
+    const multCoef = coef * BigInt(Math.pow(a, pwr)) * BigInt(Math.pow(b, i));
+    return `${multCoef}${variable}^${pwr}`;
   })
+
+
+  console.log(variableCoefs)
 
 
 
