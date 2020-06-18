@@ -24,7 +24,7 @@ Examples:
 */
 
 const generatePascalTriangle = (lines = 0) => {
-  const triangle = [[1n]];
+  const triangle = [[BigInt(1)]];
   if (!lines) return triangle;
   // n - current line
   for (let n = 1; n < lines + 1; n++) {
@@ -32,8 +32,8 @@ const generatePascalTriangle = (lines = 0) => {
     const coef = [];
     // i - current element
     for (let i = 0; i < qtyElem; i++) {
-      const up = triangle[n - 1][i] || 0n;
-      const upLeft = triangle[n - 1][i - 1] || 0n;
+      const up = triangle[n - 1][i] || BigInt(0);
+      const upLeft = triangle[n - 1][i - 1] || BigInt(0);
       coef[i] = up + upLeft;
     }
     triangle.push(coef);
@@ -73,7 +73,7 @@ const expand = (expr) => {
   };
 
   const inverted = (elements) => {
-    let plus = true
+    let plus = false
     let str = elements.shift()
     while (elements.length > 0) {
       str += plus ? '+' : '-'
@@ -86,7 +86,7 @@ const expand = (expr) => {
   const { expression, power, variable, a, b, signalsInverted } = parseExpr(expr);
   console.log(`Expression: ${expression}  Power: ${power}  Variable-Coef: ${a}  Variable ${variable}  Signal: ${signalsInverted}\n`);
 
-  if (power === 0) return 1;
+  if (power === 0) return '1';
   const pascal = generatePascalTriangle(power);
   const pascalCoefs = pascal[power];
 
@@ -98,14 +98,14 @@ const expand = (expr) => {
   });
 
   const shouldInvertSignal = /\-/g.test(expression);
-  console.log(elements)
 
   return shouldInvertSignal ? inverted(elements) : elements.join('+');
 };
 
+console.log(expand("(x+1)^0"));     // returns '1'
 // console.log(expand("(2f+4)^6"));     // returns "64f^6 + 768f^5 + 3840f^4 + 10240f^3 + 15360f^2 + 12288f + 4096"
 // console.log(expand("(x+1)^2"));      // returns "x^2 + 2x + 1"
-console.log(expand('(p-1)^3')); // returns "p^3 - 3p^2 + 3p - 1"
+// console.log(expand('(p-1)^3')); // returns "p^3 - 3p^2 + 3p - 1"
 // console.log(expand("(-2a-4)^0"));    // returns "1"
 // console.log(expand("(-12t+43)^2"));  // returns "144t^2- 1032t + 1849"
 // console.log(expand("(r+0)^203"));    // returns "r^203"
