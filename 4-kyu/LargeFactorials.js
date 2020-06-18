@@ -32,6 +32,18 @@ const multiply = (str, num) => {
   return result.reverse().join('');
 };
 
-const factorial = (n) => {};
+const factorial = (n) => {
+  if (n < 0) return null;
+  else if (n === 0 || n === 1) return '1';
+  let result = '1';
+  while (n > 1) {
+    result = multiply(result, n);
+    n--;
+  }
+  return result;
+};
 
-console.log(multiply('237', 49));
+console.log(factorial(1)); // '1'
+console.log(factorial(5)); // '120'
+console.log(factorial(9)); // '362880'
+console.log(factorial(15)); // '1307674368000'
