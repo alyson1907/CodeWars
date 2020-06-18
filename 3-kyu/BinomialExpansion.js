@@ -102,7 +102,6 @@ const expand = (expr) => {
   return shouldInvertSignal ? inverted(elements) : elements.join('+');
 };
 
-console.log(expand("(x+1)^0"));     // returns '1'
 // console.log(expand("(2f+4)^6"));     // returns "64f^6 + 768f^5 + 3840f^4 + 10240f^3 + 15360f^2 + 12288f + 4096"
 // console.log(expand("(x+1)^2"));      // returns "x^2 + 2x + 1"
 // console.log(expand('(p-1)^3')); // returns "p^3 - 3p^2 + 3p - 1"
