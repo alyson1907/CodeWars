@@ -10,12 +10,12 @@ Examples:
       interleave([]) === []
 */
 function interleave(...args) {
-  let maxLen = 0;
+  let maxLen = 0
   args.forEach(arr => {
-    if (arr.length > maxLen) maxLen = arr.length;
+    if (arr.length > maxLen) maxLen = arr.length
   })
 
-  const result = [];
+  const result = []
   for (let i = 0; i < maxLen; i++) {
     // Array
     for (let j = 0; j < args.length; j++) {
@@ -24,10 +24,10 @@ function interleave(...args) {
     }
   }
 
-  return result;
+  return result
 }
 
 interleave([1, 2, 3], [4, 5]) // [1, 4, 2, 5, 3, null]
-interleave([1, 2, 3], ["c", "d", "e"]) // [1, "c", 2, "d", 3, "e"]
+interleave([1, 2, 3], ['c', 'd', 'e']) // [1, "c", 2, "d", 3, "e"]
 interleave([1, 2, 3], [4, 5, 6], [7, 8, 9]) // [1, 4, 7, 2, 5, 8, 3, 6, 9]
 interleave([])
