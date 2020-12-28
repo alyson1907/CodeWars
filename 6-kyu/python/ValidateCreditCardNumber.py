@@ -38,9 +38,6 @@ def validate(n):
       res += str(doubled) if doubled < 10 else str(doubled - 9)
   acc = sum([int(d) for d in res[::-1]])
   return acc % 10 == 0
-  
-
-
 
 print(validate(123)) # False
 print(validate(1)) # False
