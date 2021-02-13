@@ -7,16 +7,18 @@ Don't forget to rate this kata! Thanks :)
 */
 
 function camelCase(str: string): string {
-  return str.split(' ').map(word => {
-    const letters: Array<string> = word.split('')
-    letters[0] = letters[0] && letters[0].toUpperCase()
-    return letters.join('')
-  }).join('')
+  return str
+    .split(' ')
+    .map((word) => {
+      const letters: Array<string> = word.split('')
+      letters[0] = letters[0] && letters[0].toUpperCase()
+      return letters.join('')
+    })
+    .join('')
 }
 
-
-console.log(camelCase("")) // ""
-console.log(camelCase("test case")) // "TestCase"
-console.log(camelCase("camel case method")) // "CamelCaseMethod"
-console.log(camelCase("say hello ")) // "SayHello"
-console.log(camelCase(" camel case word")) // "CamelCaseWord"
+console.log(camelCase('')) // ""
+console.log(camelCase('test case')) // "TestCase"
+console.log(camelCase('camel case method')) // "CamelCaseMethod"
+console.log(camelCase('say hello ')) // "SayHello"
+console.log(camelCase(' camel case word')) // "CamelCaseWord"
