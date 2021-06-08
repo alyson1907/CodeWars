@@ -13,8 +13,8 @@
 
 validPhoneNumber() {
   phone=$1
-  pattern=^\(\d\d\d\)\ \d\d\d-\d\d\d\d$
-  [[ $phone =~ $pattern ]] && echo "True" || echo "False"
+  pattern=^\(\d{3}\)\ \d{3}\-\d{4}$
+  [[ "$phone" =~ $pattern ]] && echo "True" || echo "False"
 }
 
 validPhoneNumber (123) 456-7890 # =>  returns true
