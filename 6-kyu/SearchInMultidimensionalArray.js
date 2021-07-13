@@ -9,14 +9,14 @@ Example:
     locate(['a','b',['c','d',['e']]],'f'); // should return false
 */
 
-const aux = [];
+const aux = []
 const flat = (arr) => {
-  arr.forEach((el) => (Array.isArray(el) ? flat(el) : aux.push(el)));
-  return aux;
-};
+  arr.forEach((el) => (Array.isArray(el) ? flat(el) : aux.push(el)))
+  return aux
+}
 
 const locate = (arr, value) => {
-  return flat(arr).some((el) => el === value);
-};
+  return flat(arr).some((el) => el === value)
+}
 
-console.log(locate(['a', 'b', ['c', 'd', ['e']]], 'e')); // should return true
+console.log(locate(['a', 'b', ['c', 'd', ['e']]], 'e')) // should return true

@@ -10,14 +10,14 @@ Bob is preparing to pass IQ test. The most frequent task in this test is to find
   iqTest("1 2 1 1") => 2 // Second number is even, while the rest of the numbers are odd
 */
 
-const iqTest = numbers => {
+const iqTest = (numbers) => {
   let odds = 0
   let evens = 0
   const nums = numbers.split(' ')
   // Counting
-  nums.forEach(n => {
+  nums.forEach((n) => {
     n % 2 == 0 ? odds++ : evens++
   })
-  const index = odds === 1 ? nums.findIndex(n => !(n % 2)) : nums.findIndex(n => n % 2)
+  const index = odds === 1 ? nums.findIndex((n) => !(n % 2)) : nums.findIndex((n) => n % 2)
   return index + 1
 }

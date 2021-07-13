@@ -1,4 +1,4 @@
-function likes (names) {
+function likes(names) {
   const len = names.length
 
   switch (len) {
